@@ -35,7 +35,7 @@ function Home() {
         </section>
 
         <section className='mt-8 pb-8 pt-4 border-t border-foreground/20'>
-          <p className='text-lg text-muted-foreground'><span className='font-mono'>Copyright</span>&nbsp;&copy;&nbsp;<span className='font-mono'>2026.</span></p>
+          <p className='text-lg text-surface'>Copyright &copy; 2026.</p>
         </section>
       </section>
     </main >
