@@ -1,14 +1,40 @@
+import { makeCSSCalc, scaling } from '#/lib/scaling'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute('/')({
+  component: Home,
+})
 
 function Home() {
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
-    </div>
+    <main className='w-full h-full' style={{ scale: scaling.converse, transformOrigin: 'top left', maxWidth: makeCSSCalc('100%', scaling.inverse) }}>
+      <section className='max-w-[calc(100%-4rem)] w-full h-full mx-auto'>
+        <section className='mb-8 py-8 border-b border-foreground/20'>
+          <h1 className='text-2xl font-bold'>ZeroPage</h1>
+          <p className='text-lg'>A blog for developers</p>
+        </section>
+
+        <section className='grid gap-8 grid-cols-3 auto-rows-fr'>
+          {[1, 2, 3, 4, 5, 6, 7].map((_, idx) => (
+            <div key={idx} className='space-y-3'>
+              <div className='bg-muted w-full rounded-lg overflow-hidden' style={{
+                minHeight: makeCSSCalc('328px', scaling.inverse),
+                height: makeCSSCalc('328px', scaling.inverse),
+                maxHeight: makeCSSCalc('328px', scaling.inverse)
+              }}>
+                <img className='w-full h-auto object-cover' src={`https://picsum.photos/1280/720?${idx}`} alt='Blog post cover' />
+              </div>
+              <div className='space-y-1'>
+                <h2 className='text-xl font-semibold text-foreground leading-snug'>How Remote Work Is Changing Small Town Economies</h2>
+                <p className='text-surface'>As more people leave big cities for quieter communities, small towns are
+                  seeing unexpected growth. Here’s how remote work is reshaping local
+                  businesses, housing, and daily life.</p>
+              </div>
+            </div>
+          ))}
+        </section>
+
+      </section>
+    </main >
   )
 }
