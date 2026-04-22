@@ -22,7 +22,7 @@ export const Route = createRootRoute({
     ],
     scripts: [
       {
-        src: 'scaling.js',
+        src: '/scaling.js',
         async: true,
       },
     ],

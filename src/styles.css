@@ -212,3 +212,9 @@ pre code {
     color: var(--foreground);
   }
 }
+
+@media (max-width: 1280px) {
+  :root {
+    --scale-converse: 1 !important;
+  }
+}

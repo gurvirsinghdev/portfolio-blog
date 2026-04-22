@@ -12,7 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainPostIdRouteImport } from './routes/_main/$postId'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as MainPostCreateRouteImport } from './routes/_main/post/create'
+import { Route as MainAuthRegisterRouteImport } from './routes/_main/auth/register'
+import { Route as MainAuthLoginRouteImport } from './routes/_main/auth/login'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
@@ -28,44 +31,84 @@ const MainPostIdRoute = MainPostIdRouteImport.update({
   path: '/$postId',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MainPostCreateRoute = MainPostCreateRouteImport.update({
   id: '/post/create',
   path: '/post/create',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainAuthRegisterRoute = MainAuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainAuthLoginRoute = MainAuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
   getParentRoute: () => MainRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
   '/$postId': typeof MainPostIdRoute
+  '/auth/login': typeof MainAuthLoginRoute
+  '/auth/register': typeof MainAuthRegisterRoute
   '/post/create': typeof MainPostCreateRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/$postId': typeof MainPostIdRoute
   '/': typeof MainIndexRoute
+  '/auth/login': typeof MainAuthLoginRoute
+  '/auth/register': typeof MainAuthRegisterRoute
   '/post/create': typeof MainPostCreateRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteRouteWithChildren
   '/_main/$postId': typeof MainPostIdRoute
   '/_main/': typeof MainIndexRoute
+  '/_main/auth/login': typeof MainAuthLoginRoute
+  '/_main/auth/register': typeof MainAuthRegisterRoute
   '/_main/post/create': typeof MainPostCreateRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$postId' | '/post/create'
+  fullPaths:
+    | '/'
+    | '/$postId'
+    | '/auth/login'
+    | '/auth/register'
+    | '/post/create'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$postId' | '/' | '/post/create'
+  to:
+    | '/$postId'
+    | '/'
+    | '/auth/login'
+    | '/auth/register'
+    | '/post/create'
+    | '/api/auth/$'
   id:
     | '__root__'
     | '/_main'
     | '/_main/$postId'
     | '/_main/'
+    | '/_main/auth/login'
+    | '/_main/auth/register'
     | '/_main/post/create'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   MainRouteRoute: typeof MainRouteRouteWithChildren
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -91,11 +134,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainPostIdRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_main/post/create': {
       id: '/_main/post/create'
       path: '/post/create'
       fullPath: '/post/create'
       preLoaderRoute: typeof MainPostCreateRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/auth/register': {
+      id: '/_main/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof MainAuthRegisterRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/auth/login': {
+      id: '/_main/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof MainAuthLoginRouteImport
       parentRoute: typeof MainRouteRoute
     }
   }
@@ -104,12 +168,16 @@ declare module '@tanstack/react-router' {
 interface MainRouteRouteChildren {
   MainPostIdRoute: typeof MainPostIdRoute
   MainIndexRoute: typeof MainIndexRoute
+  MainAuthLoginRoute: typeof MainAuthLoginRoute
+  MainAuthRegisterRoute: typeof MainAuthRegisterRoute
   MainPostCreateRoute: typeof MainPostCreateRoute
 }
 
 const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainPostIdRoute: MainPostIdRoute,
   MainIndexRoute: MainIndexRoute,
+  MainAuthLoginRoute: MainAuthLoginRoute,
+  MainAuthRegisterRoute: MainAuthRegisterRoute,
   MainPostCreateRoute: MainPostCreateRoute,
 }
 
@@ -119,6 +187,7 @@ const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
