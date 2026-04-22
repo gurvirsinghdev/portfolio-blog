@@ -169,22 +169,10 @@ body,
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-base);
+  background: oklch(0.21 0.006 285.885);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-
-a {
-  color: var(--lagoon-deep);
-  text-decoration-color: rgba(50, 143, 151, 0.4);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-
-a:hover {
-  color: #246f76;
 }
 
 code {
@@ -209,12 +197,6 @@ pre code {
   border-radius: 12px;
   background: #1d2e45;
   color: #e8efff;
-}
-
-button,
-a {
-  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease,
-    transform 180ms ease;
 }
 
 @layer base {
