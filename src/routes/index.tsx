@@ -1,13 +1,11 @@
-import { db } from '#/lib/db'
-import { makeCSSCalc, makeScalingFactor, mobileScaling } from '#/lib/scaling'
-import { postsTable } from '#/schema'
+import {
+  makeCSSCalc,
+  makeScalingFactor,
+  useClientAwareScaling,
+} from '#/lib/scaling'
+import { getPosts } from '#/lib/server-functions'
+import { createBreifFromDescription, getPostCoverImageLink } from '#/lib/utils'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-import { desc } from 'drizzle-orm'
-
-const getPosts = createServerFn({ method: 'GET' }).handler(() =>
-  db.select().from(postsTable).orderBy(desc(postsTable.createdAt)),
-)
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -15,11 +13,14 @@ export const Route = createFileRoute('/')({
 })
 
 function Home() {
-  const scaling =
-    window.innerWidth > 1280 ? makeScalingFactor(3.5 / 3) : mobileScaling
+  const scaling = useClientAwareScaling(makeScalingFactor(3.5 / 3))
+
   const posts = Route.useLoaderData().map((post) => ({
     ...post,
-    description: (post.description.trim().split('\n')[0] ?? '').trim(),
+    id: post.id,
+    title: post.title,
+    coverLink: getPostCoverImageLink(post.id),
+    description: createBreifFromDescription(post.description),
   }))
 
   return (
@@ -45,13 +46,12 @@ function Home() {
                   className="bg-muted w-full"
                   style={{
                     minHeight: makeCSSCalc('328px', scaling.inverse),
-                    height: makeCSSCalc('328px', scaling.inverse),
                     maxHeight: makeCSSCalc('328px', scaling.inverse),
                   }}
                 >
                   <img
                     className="w-full h-full object-cover"
-                    src={`https://picsum.photos/seed/${post.title.replaceAll(' ', '')}/1280/720`}
+                    src={post.coverLink}
                     alt="Blog post cover"
                   />
                 </div>

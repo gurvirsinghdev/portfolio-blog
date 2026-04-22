@@ -1,17 +1,11 @@
-import { db } from '#/lib/db'
-import { makeCSSCalc, mobileScaling, makeScalingFactor } from '#/lib/scaling'
-import { postsTable } from '#/schema'
-import { createFileRoute } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-import { eq } from 'drizzle-orm'
-import * as z from 'zod/mini'
-
-const getPostByIdSchema = z.object({ id: z.string() })
-const getPostById = createServerFn({ method: 'GET' })
-  .inputValidator((data: unknown) => getPostByIdSchema.parse(data))
-  .handler(({ data }) => {
-    return db.select().from(postsTable).where(eq(postsTable.id, data.id))
-  })
+import {
+  makeCSSCalc,
+  makeScalingFactor,
+  useClientAwareScaling,
+} from '#/lib/scaling'
+import { getPostById } from '#/lib/server-functions'
+import { getPostCoverImageLink } from '#/lib/utils'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/$postId')({
   component: RouteComponent,
@@ -21,9 +15,12 @@ export const Route = createFileRoute('/$postId')({
 })
 
 function RouteComponent() {
-  const scaling =
-    window.innerWidth > 1280 ? makeScalingFactor(3 / 2) : mobileScaling
-  const post = Route.useLoaderData()[0]!
+  const scaling = useClientAwareScaling(makeScalingFactor(3 / 2))
+
+  const post = Route.useLoaderData().at(0)
+  if (!post) {
+    throw notFound()
+  }
 
   return (
     <main
@@ -39,14 +36,17 @@ function RouteComponent() {
           <h1 className="capitalize">{post.title}</h1>
 
           <img
-            src={`http://picsum.photos/seed/${post.title.replaceAll(' ', '')}/1920/1080`}
+            src={getPostCoverImageLink(post.id)}
             alt="Blog post cover"
             className="w-full aspect-16/5.5 object-bottom rounded-lg object-cover"
           />
 
-          {post.description.split('\n').map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
+          {post.description
+            .split('\n')
+            .filter((p) => p)
+            .map((p) => (
+              <p>{p.trim()}</p>
+            ))}
         </div>
 
         <section className="mt-8 pb-8 pt-4 border-t border-foreground/20">
