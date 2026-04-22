@@ -22,7 +22,7 @@ function RouteComponent() {
       <img
         src={getPostCoverImageLink(post.id)}
         alt="Blog post cover"
-        className="w-full aspect-16/5.5 object-bottom rounded-lg object-cover"
+        className="aspect-16/5.5 w-full rounded-lg object-cover object-bottom"
       />
 
       {post.description

@@ -20,20 +20,20 @@ function Home() {
 
   return (
     <>
-      <section className="flex items-center justify-between border-b pb-8 border-foreground/20">
+      <section className="border-foreground/20 flex items-center justify-between border-b pb-8">
         <div>
           <h1 className="text-2xl font-bold">ZeroPage</h1>
           <p className="text-lg">A blog for developers</p>
         </div>
 
         <Link to="/post/create">
-          <span className="underline text-muted-foreground hover:text-foreground">
+          <span className="text-muted-foreground hover:text-foreground underline">
             Want to post something?
           </span>
         </Link>
       </section>
 
-      <section className="grid gap-12 md:gap-10 lg:gap-8 pt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+      <section className="grid auto-rows-fr grid-cols-1 gap-12 pt-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-8">
         {posts.map((post, idx) => (
           <Link
             preload={false}
@@ -41,16 +41,16 @@ function Home() {
             to={'/$postId'}
             params={{ postId: post.id }}
           >
-            <div className="space-y-3 group border-2">
+            <div className="group space-y-3 border-2">
               <div className="bg-muted w-full">
                 <img
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                   src={post.coverLink}
                   alt="Blog post cover"
                 />
               </div>
               <div className="space-y-1 p-3">
-                <h2 className="text-xl capitalize group-hover:underline line-clamp-2 font-semibold text-foreground leading-snug">
+                <h2 className="text-foreground line-clamp-2 text-xl leading-snug font-semibold capitalize group-hover:underline">
                   {post.title}
                 </h2>
                 <p className="text-surface line-clamp-3">{post.description}</p>

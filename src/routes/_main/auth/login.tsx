@@ -29,10 +29,10 @@ function RouteComponent() {
   }
 
   return (
-    <div className="w-full grid place-items-center">
+    <div className="grid w-full place-items-center">
       <div className="w-full">
         <Link
-          className="underline text-muted-foreground  flex items-center justify-start gap-1 hover:text-foreground w-max"
+          className="text-muted-foreground hover:text-foreground flex w-max items-center justify-start gap-1 underline"
           to={'/'}
         >
           <HiArrowLongLeft className="size-5" />
@@ -40,14 +40,14 @@ function RouteComponent() {
         </Link>
       </div>
       <form className="w-full py-16" onSubmit={formHandler}>
-        <div className="flex w-full items-start flex-col justify-center ">
+        <div className="flex w-full flex-col items-start justify-center">
           <label className="p-1 px-0">Email</label>
 
           <input
             type="text"
             name="email"
             placeholder="hi@gurvirsingh.me"
-            className="w-full border-2 bg-background/10 p-3 outline-none placeholder:text-muted-foreground/50"
+            className="bg-background/10 placeholder:text-muted-foreground/50 w-full border-2 p-3 outline-none"
           />
 
           <div className="my-1" />
@@ -56,18 +56,23 @@ function RouteComponent() {
             name="password"
             type="password"
             placeholder="********"
-            className="w-full border-2 bg-background/10 p-3 outline-none placeholder:text-muted-foreground/50"
+            className="bg-background/10 placeholder:text-muted-foreground/50 w-full border-2 p-3 outline-none"
           />
         </div>
 
         <div className="my-3" />
-        <div className='flex items-center justify-end w-full'>
-          <Link to={"/auth/register"} className='underline text-muted-foreground hover:text-foreground'>Don't have an account?</Link>
+        <div className="flex w-full items-center justify-end">
+          <Link
+            to={'/auth/register'}
+            className="text-muted-foreground hover:text-foreground underline"
+          >
+            Don't have an account?
+          </Link>
         </div>
         <div className="my-3" />
         <button
           type="submit"
-          className="p-4 border-2 w-full bg-background/20 hover:bg-background/40 cursor-pointer"
+          className="bg-background/20 hover:bg-background/40 w-full cursor-pointer border-2 p-4"
         >
           Login
         </button>

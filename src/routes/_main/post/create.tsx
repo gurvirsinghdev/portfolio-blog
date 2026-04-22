@@ -31,10 +31,10 @@ function RouteComponent() {
   )
 
   return (
-    <div className="w-full h-96 grid place-items-center">
+    <div className="grid h-96 w-full place-items-center">
       <div className="w-full">
         <Link
-          className="underline text-muted-foreground  flex items-center justify-start gap-1 hover:text-foreground w-max"
+          className="text-muted-foreground hover:text-foreground flex w-max items-center justify-start gap-1 underline"
           to={'/'}
         >
           <HiArrowLongLeft className="size-5" />
@@ -42,21 +42,21 @@ function RouteComponent() {
         </Link>
       </div>
       <form className="w-full">
-        <div className="flex w-full items-center flex-col justify-center border-2 bg-background/10">
+        <div className="bg-background/10 flex w-full flex-col items-center justify-center border-2">
           <input
             type="text"
             placeholder="Give your post a catchy title"
-            className="w-full border-b-2 p-3 outline-none placeholder:text-muted-foreground/50"
+            className="placeholder:text-muted-foreground/50 w-full border-b-2 p-3 outline-none"
           />
           <textarea
             ref={textAreaRef}
             placeholder="Share your thoughts, ideas, or story"
-            className="resize-none w-full p-3 outline-none placeholder:text-muted-foreground/50"
+            className="placeholder:text-muted-foreground/50 w-full resize-none p-3 outline-none"
             rows={6}
           />
         </div>
 
-        <button className="p-4 border-2 border-t-0 w-full bg-background/20">
+        <button className="bg-background/20 w-full border-2 border-t-0 p-4">
           Create Post
         </button>
       </form>
