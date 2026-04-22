@@ -20,6 +20,12 @@ export const Route = createRootRoute({
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        src: 'scaling.js',
+        async: true,
+      },
+    ],
   }),
   shellComponent: RootDocument,
 })

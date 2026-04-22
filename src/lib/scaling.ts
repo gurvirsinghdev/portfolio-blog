@@ -1,16 +1,27 @@
-export const makeScalingFactor = (scaling: number) => ({
-  converse: scaling,
-  inverse: 1 / scaling,
-})
-export type ScalingFactor = ReturnType<typeof makeScalingFactor>
+export const SCALING_VARIABLES = {
+  converse: '--scale-converse',
+  inverse: '--scale-inverse',
+} as const
+export type ScalingVariables =
+  (typeof SCALING_VARIABLES)[keyof typeof SCALING_VARIABLES]
 
-export const mobileScaling = makeScalingFactor(1)
-export const makeCSSCalc = (cssWidth: string, scaling_type: number) =>
-  `calc(${cssWidth}*${scaling_type})`
+export const makeCSSCalc = (
+  cssWidth: string,
+  variable: ScalingVariables,
+): string => {
+  return `calc(${cssWidth} * var(${variable}))`
+}
 
-export const useClientAwareScaling = function (
-  scaling: ScalingFactor,
-  max_size: number = 1280,
-): ScalingFactor {
-  return window.innerWidth > max_size ? scaling : mobileScaling
+export const containerScalingStyle = {
+  transformOrigin: 'top left',
+  scale: makeCSSCalc('100%', SCALING_VARIABLES.converse),
+  maxWidth: makeCSSCalc('100%', SCALING_VARIABLES.inverse),
+} as const
+
+export const updatePageScaling = function (scaling: string) {
+  if (typeof document !== 'undefined')
+    document.documentElement.style.setProperty(
+      SCALING_VARIABLES.converse,
+      scaling,
+    )
 }

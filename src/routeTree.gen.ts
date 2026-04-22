@@ -9,68 +9,93 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PostIdRouteImport } from './routes/$postId'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as MainRouteRouteImport } from './routes/_main/route'
+import { Route as MainIndexRouteImport } from './routes/_main/index'
+import { Route as MainPostIdRouteImport } from './routes/_main/$postId'
 
-const PostIdRoute = PostIdRouteImport.update({
-  id: '/$postId',
-  path: '/$postId',
+const MainRouteRoute = MainRouteRouteImport.update({
+  id: '/_main',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const MainIndexRoute = MainIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => MainRouteRoute,
+} as any)
+const MainPostIdRoute = MainPostIdRouteImport.update({
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => MainRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/$postId': typeof PostIdRoute
+  '/': typeof MainIndexRoute
+  '/$postId': typeof MainPostIdRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/$postId': typeof PostIdRoute
+  '/$postId': typeof MainPostIdRoute
+  '/': typeof MainIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/$postId': typeof PostIdRoute
+  '/_main': typeof MainRouteRouteWithChildren
+  '/_main/$postId': typeof MainPostIdRoute
+  '/_main/': typeof MainIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/$postId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$postId'
-  id: '__root__' | '/' | '/$postId'
+  to: '/$postId' | '/'
+  id: '__root__' | '/_main' | '/_main/$postId' | '/_main/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  PostIdRoute: typeof PostIdRoute
+  MainRouteRoute: typeof MainRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/$postId': {
-      id: '/$postId'
-      path: '/$postId'
-      fullPath: '/$postId'
-      preLoaderRoute: typeof PostIdRouteImport
+    '/_main': {
+      id: '/_main'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof MainRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_main/': {
+      id: '/_main/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof MainIndexRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
+    '/_main/$postId': {
+      id: '/_main/$postId'
+      path: '/$postId'
+      fullPath: '/$postId'
+      preLoaderRoute: typeof MainPostIdRouteImport
+      parentRoute: typeof MainRouteRoute
     }
   }
 }
 
+interface MainRouteRouteChildren {
+  MainPostIdRoute: typeof MainPostIdRoute
+  MainIndexRoute: typeof MainIndexRoute
+}
+
+const MainRouteRouteChildren: MainRouteRouteChildren = {
+  MainPostIdRoute: MainPostIdRoute,
+  MainIndexRoute: MainIndexRoute,
+}
+
+const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
+  MainRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  PostIdRoute: PostIdRoute,
+  MainRouteRoute: MainRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
