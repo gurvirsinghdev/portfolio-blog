@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainPostIdRouteImport } from './routes/_main/$postId'
+import { Route as MainPostCreateRouteImport } from './routes/_main/post/create'
 
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
@@ -27,27 +28,40 @@ const MainPostIdRoute = MainPostIdRouteImport.update({
   path: '/$postId',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const MainPostCreateRoute = MainPostCreateRouteImport.update({
+  id: '/post/create',
+  path: '/post/create',
+  getParentRoute: () => MainRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
   '/$postId': typeof MainPostIdRoute
+  '/post/create': typeof MainPostCreateRoute
 }
 export interface FileRoutesByTo {
   '/$postId': typeof MainPostIdRoute
   '/': typeof MainIndexRoute
+  '/post/create': typeof MainPostCreateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteRouteWithChildren
   '/_main/$postId': typeof MainPostIdRoute
   '/_main/': typeof MainIndexRoute
+  '/_main/post/create': typeof MainPostCreateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$postId'
+  fullPaths: '/' | '/$postId' | '/post/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$postId' | '/'
-  id: '__root__' | '/_main' | '/_main/$postId' | '/_main/'
+  to: '/$postId' | '/' | '/post/create'
+  id:
+    | '__root__'
+    | '/_main'
+    | '/_main/$postId'
+    | '/_main/'
+    | '/_main/post/create'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,17 +91,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainPostIdRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/_main/post/create': {
+      id: '/_main/post/create'
+      path: '/post/create'
+      fullPath: '/post/create'
+      preLoaderRoute: typeof MainPostCreateRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
   }
 }
 
 interface MainRouteRouteChildren {
   MainPostIdRoute: typeof MainPostIdRoute
   MainIndexRoute: typeof MainIndexRoute
+  MainPostCreateRoute: typeof MainPostCreateRoute
 }
 
 const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainPostIdRoute: MainPostIdRoute,
   MainIndexRoute: MainIndexRoute,
+  MainPostCreateRoute: MainPostCreateRoute,
 }
 
 const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(

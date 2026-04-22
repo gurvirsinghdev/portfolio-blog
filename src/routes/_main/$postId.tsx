@@ -16,7 +16,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className="prose prose-invert max-w-none mt-16">
+    <div className="prose prose-invert max-w-none pt-8">
       <h1 className="capitalize">{post.title}</h1>
 
       <img

@@ -20,12 +20,20 @@ function Home() {
 
   return (
     <>
-      <section className="mb-8 py-8 border-b border-foreground/20">
-        <h1 className="text-2xl font-bold">ZeroPage</h1>
-        <p className="text-lg">A blog for developers</p>
+      <section className="flex items-center justify-between border-b pb-8 border-foreground/20">
+        <div>
+          <h1 className="text-2xl font-bold">ZeroPage</h1>
+          <p className="text-lg">A blog for developers</p>
+        </div>
+
+        <Link to="/post/create">
+          <span className="underline text-muted-foreground hover:text-foreground">
+            Want to post something?
+          </span>
+        </Link>
       </section>
 
-      <section className="grid gap-12 md:gap-10 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+      <section className="grid gap-12 md:gap-10 lg:gap-8 pt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
         {posts.map((post, idx) => (
           <Link
             preload={false}
