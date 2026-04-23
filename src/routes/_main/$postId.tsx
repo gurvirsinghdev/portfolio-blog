@@ -9,7 +9,7 @@ export const Route = createFileRoute('/_main/$postId')({
 })
 
 function RouteComponent() {
-  updatePageScaling('3/2')
+  updatePageScaling('2/1')
   const post = Route.useLoaderData().at(0)
   if (!post) {
     throw notFound()

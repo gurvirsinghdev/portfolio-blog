@@ -26,7 +26,7 @@ function Home() {
           <p className="text-lg">A blog for developers</p>
         </div>
 
-        <Link to="/post/create">
+        <Link to="/dashboard">
           <span className="text-muted-foreground hover:text-foreground underline">
             Want to post something?
           </span>

@@ -3,7 +3,7 @@ const getPageScaling = () => {
     case '/':
       return '7/6'
     default:
-      return '3/2'
+      return '2/1'
   }
 }
 
