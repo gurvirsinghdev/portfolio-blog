@@ -1,5 +1,5 @@
-import * as p from 'drizzle-orm/pg-core'
-import { user } from './auth-schema'
+import * as p from 'drizzle-orm/pg-core';
+import { user } from './auth-schema';
 
 export const postsTable = p.pgTable('posts', {
   id: p.uuid().primaryKey().defaultRandom(),
@@ -11,4 +11,4 @@ export const postsTable = p.pgTable('posts', {
   description: p.text().notNull(),
   createdAt: p.timestamp().defaultNow(),
   updatedAt: p.timestamp().defaultNow(),
-})
+});

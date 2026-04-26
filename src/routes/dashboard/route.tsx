@@ -1,15 +1,13 @@
-import { cn } from '#/lib/utils'
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
+import { cn } from '#/lib/utils';
+import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/dashboard')({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
   return (
-    <div
-      className="grid grid-cols-1 grid-rows-1 lg:grid-cols-[1fr_3fr]"
-   >
+    <div className="grid grid-cols-1 grid-rows-1 lg:grid-cols-[1fr_3fr]">
       <div className="hidden flex-col border-r-2 lg:flex">
         <div className="w-full border-b-2 p-3">
           <span>ZeroPage</span>
@@ -31,5 +29,5 @@ function RouteComponent() {
         <Outlet />
       </div>
     </div>
-  )
+  );
 }

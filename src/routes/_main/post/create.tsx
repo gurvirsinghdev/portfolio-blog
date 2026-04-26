@@ -1,32 +1,32 @@
-import { authMiddleware } from '#/lib/middleware'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import { authMiddleware } from '#/lib/middleware';
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { useEffect, useRef } from 'react';
 
-import { HiArrowLongLeft } from 'react-icons/hi2'
+import { HiArrowLongLeft } from 'react-icons/hi2';
 
 export const Route = createFileRoute('/_main/post/create')({
   component: RouteComponent,
   server: {
     middleware: [authMiddleware],
   },
-})
+});
 
 function RouteComponent() {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(
     function () {
-      if (!textAreaRef.current) return
+      if (!textAreaRef.current) return;
 
       const updateHeight = () => {
         textAreaRef.current?.style?.setProperty(
           'height',
           textAreaRef.current.scrollHeight + 'px',
-        )
-      }
-      textAreaRef.current.addEventListener('input', updateHeight)
+        );
+      };
+      textAreaRef.current.addEventListener('input', updateHeight);
     },
     [textAreaRef],
-  )
+  );
 
   return (
     <div className="grid h-96 w-full place-items-center">
@@ -59,5 +59,5 @@ function RouteComponent() {
         </button>
       </form>
     </div>
-  )
+  );
 }

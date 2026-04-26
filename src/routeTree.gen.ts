@@ -14,6 +14,7 @@ import { Route as MainRouteRouteImport } from './routes/_main/route'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as MainIndexRouteImport } from './routes/_main/index'
 import { Route as MainPostIdRouteImport } from './routes/_main/$postId'
+import { Route as MainAuthRouteRouteImport } from './routes/_main/auth/route'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as MainPostCreateRouteImport } from './routes/_main/post/create'
 import { Route as MainAuthRegisterRouteImport } from './routes/_main/auth/register'
@@ -43,6 +44,11 @@ const MainPostIdRoute = MainPostIdRouteImport.update({
   path: '/$postId',
   getParentRoute: () => MainRouteRoute,
 } as any)
+const MainAuthRouteRoute = MainAuthRouteRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => MainRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -54,19 +60,20 @@ const MainPostCreateRoute = MainPostCreateRouteImport.update({
   getParentRoute: () => MainRouteRoute,
 } as any)
 const MainAuthRegisterRoute = MainAuthRegisterRouteImport.update({
-  id: '/auth/register',
-  path: '/auth/register',
-  getParentRoute: () => MainRouteRoute,
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => MainAuthRouteRoute,
 } as any)
 const MainAuthLoginRoute = MainAuthLoginRouteImport.update({
-  id: '/auth/login',
-  path: '/auth/login',
-  getParentRoute: () => MainRouteRoute,
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => MainAuthRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof MainIndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/auth': typeof MainAuthRouteRouteWithChildren
   '/$postId': typeof MainPostIdRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/auth/login': typeof MainAuthLoginRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof MainAuthRouteRouteWithChildren
   '/$postId': typeof MainPostIdRoute
   '/': typeof MainIndexRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main': typeof MainRouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/_main/auth': typeof MainAuthRouteRouteWithChildren
   '/_main/$postId': typeof MainPostIdRoute
   '/_main/': typeof MainIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/auth'
     | '/$postId'
     | '/dashboard/'
     | '/auth/login'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/auth'
     | '/$postId'
     | '/'
     | '/dashboard'
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_main'
     | '/dashboard'
+    | '/_main/auth'
     | '/_main/$postId'
     | '/_main/'
     | '/dashboard/'
@@ -171,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainPostIdRouteImport
       parentRoute: typeof MainRouteRoute
     }
+    '/_main/auth': {
+      id: '/_main/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof MainAuthRouteRouteImport
+      parentRoute: typeof MainRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -187,34 +206,46 @@ declare module '@tanstack/react-router' {
     }
     '/_main/auth/register': {
       id: '/_main/auth/register'
-      path: '/auth/register'
+      path: '/register'
       fullPath: '/auth/register'
       preLoaderRoute: typeof MainAuthRegisterRouteImport
-      parentRoute: typeof MainRouteRoute
+      parentRoute: typeof MainAuthRouteRoute
     }
     '/_main/auth/login': {
       id: '/_main/auth/login'
-      path: '/auth/login'
+      path: '/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof MainAuthLoginRouteImport
-      parentRoute: typeof MainRouteRoute
+      parentRoute: typeof MainAuthRouteRoute
     }
   }
 }
 
-interface MainRouteRouteChildren {
-  MainPostIdRoute: typeof MainPostIdRoute
-  MainIndexRoute: typeof MainIndexRoute
+interface MainAuthRouteRouteChildren {
   MainAuthLoginRoute: typeof MainAuthLoginRoute
   MainAuthRegisterRoute: typeof MainAuthRegisterRoute
+}
+
+const MainAuthRouteRouteChildren: MainAuthRouteRouteChildren = {
+  MainAuthLoginRoute: MainAuthLoginRoute,
+  MainAuthRegisterRoute: MainAuthRegisterRoute,
+}
+
+const MainAuthRouteRouteWithChildren = MainAuthRouteRoute._addFileChildren(
+  MainAuthRouteRouteChildren,
+)
+
+interface MainRouteRouteChildren {
+  MainAuthRouteRoute: typeof MainAuthRouteRouteWithChildren
+  MainPostIdRoute: typeof MainPostIdRoute
+  MainIndexRoute: typeof MainIndexRoute
   MainPostCreateRoute: typeof MainPostCreateRoute
 }
 
 const MainRouteRouteChildren: MainRouteRouteChildren = {
+  MainAuthRouteRoute: MainAuthRouteRouteWithChildren,
   MainPostIdRoute: MainPostIdRoute,
   MainIndexRoute: MainIndexRoute,
-  MainAuthLoginRoute: MainAuthLoginRoute,
-  MainAuthRegisterRoute: MainAuthRegisterRoute,
   MainPostCreateRoute: MainPostCreateRoute,
 }
 

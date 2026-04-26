@@ -1,11 +1,11 @@
-import { getPosts } from '#/lib/server-functions'
-import { createBreifFromDescription, getPostCoverImageLink } from '#/lib/utils'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { getPosts } from '#/lib/server-functions';
+import { createBreifFromDescription, getPostCoverImageLink } from '#/lib/utils';
+import { createFileRoute, Link } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_main/')({
   component: Home,
   loader: () => getPosts(),
-})
+});
 
 function Home() {
   const posts = Route.useLoaderData().map((post) => ({
@@ -14,7 +14,7 @@ function Home() {
     title: post.title,
     coverLink: getPostCoverImageLink(post.id),
     description: createBreifFromDescription(post.description),
-  }))
+  }));
 
   return (
     <>
@@ -58,5 +58,5 @@ function Home() {
         ))}
       </section>
     </>
-  )
+  );
 }

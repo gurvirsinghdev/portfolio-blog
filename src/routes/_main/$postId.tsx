@@ -1,16 +1,16 @@
-import { getPostById } from '#/lib/server-functions'
-import { getPostCoverImageLink } from '#/lib/utils'
-import { createFileRoute, notFound } from '@tanstack/react-router'
+import { getPostById } from '#/lib/server-functions';
+import { getPostCoverImageLink } from '#/lib/utils';
+import { createFileRoute, notFound } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_main/$postId')({
   component: RouteComponent,
   loader: ({ params }) => getPostById({ data: { id: params.postId } }),
-})
+});
 
 function RouteComponent() {
-  const post = Route.useLoaderData().at(0)
+  const post = Route.useLoaderData().at(0);
   if (!post) {
-    throw notFound()
+    throw notFound();
   }
 
   return (
@@ -30,5 +30,5 @@ function RouteComponent() {
           <p>{p.trim()}</p>
         ))}
     </div>
-  )
+  );
 }
