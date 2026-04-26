@@ -1,5 +1,4 @@
 import { authClient } from '#/lib/auth-client'
-import { updatePageScaling } from '#/lib/scaling'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import type { ChangeEvent } from 'react'
 import { HiArrowLongLeft } from 'react-icons/hi2'
@@ -15,8 +14,6 @@ const formSchema = z.object({
 })
 
 function RouteComponent() {
-  updatePageScaling('14 / 10')
-
   const formHandler = function (e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.target)

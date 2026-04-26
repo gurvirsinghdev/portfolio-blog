@@ -8,9 +8,6 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --scale-converse: 1;
-  --scale-inverse: calc(1 / calc(var(--scale-converse)));
-
   --sea-ink: #173a40;
   --sea-ink-soft: #416166;
   --lagoon: #4fb8b2;
@@ -213,8 +210,3 @@ pre code {
   }
 }
 
-@media (max-width: 1280px) {
-  :root {
-    --scale-converse: 1 !important;
-  }
-}

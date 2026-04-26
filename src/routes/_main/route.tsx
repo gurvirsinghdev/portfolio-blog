@@ -1,4 +1,3 @@
-import { containerScalingStyle } from '#/lib/scaling'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_main')({
@@ -7,7 +6,7 @@ export const Route = createFileRoute('/_main')({
 
 function RouteComponent() {
   return (
-    <main className="h-full" style={{ ...containerScalingStyle }}>
+    <main className="h-full">
       <section className="mx-auto h-full w-full max-w-[min(calc(100%-4rem),2048px)]">
         <div className="mb-8 h-full" />
         <Outlet />

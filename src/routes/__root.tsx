@@ -6,6 +6,12 @@ import appCss from '../styles.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
+    scripts: [
+      {
+        src: '/scaling.js',
+
+      },
+    ],
     meta: [
       { charSet: 'utf-8' },
       {
@@ -20,12 +26,7 @@ export const Route = createRootRoute({
         href: appCss,
       },
     ],
-    scripts: [
-      {
-        src: '/scaling.js',
-        async: true,
-      },
-    ],
+
   }),
   shellComponent: RootDocument,
 })

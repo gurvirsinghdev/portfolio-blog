@@ -1,5 +1,4 @@
 import { authMiddleware } from '#/lib/middleware'
-import { updatePageScaling } from '#/lib/scaling'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 
@@ -13,7 +12,6 @@ export const Route = createFileRoute('/_main/post/create')({
 })
 
 function RouteComponent() {
-  updatePageScaling('14 / 10')
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   useEffect(
     function () {

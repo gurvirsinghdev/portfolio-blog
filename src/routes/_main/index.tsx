@@ -1,4 +1,3 @@
-import { updatePageScaling } from '#/lib/scaling'
 import { getPosts } from '#/lib/server-functions'
 import { createBreifFromDescription, getPostCoverImageLink } from '#/lib/utils'
 import { createFileRoute, Link } from '@tanstack/react-router'
@@ -9,7 +8,6 @@ export const Route = createFileRoute('/_main/')({
 })
 
 function Home() {
-  updatePageScaling('7/6')
   const posts = Route.useLoaderData().map((post) => ({
     ...post,
     id: post.id,

@@ -1,4 +1,3 @@
-import { updatePageScaling } from '#/lib/scaling'
 import { getPostById } from '#/lib/server-functions'
 import { getPostCoverImageLink } from '#/lib/utils'
 import { createFileRoute, notFound } from '@tanstack/react-router'
@@ -9,7 +8,6 @@ export const Route = createFileRoute('/_main/$postId')({
 })
 
 function RouteComponent() {
-  updatePageScaling('2/1')
   const post = Route.useLoaderData().at(0)
   if (!post) {
     throw notFound()
