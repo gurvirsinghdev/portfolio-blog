@@ -208,3 +208,16 @@ pre code {
     color: var(--foreground);
   }
 }
+
+.scaling-provider {
+  --scale: calc(14/10);
+  scale: var(--scale);
+  transform-origin: top left;
+  max-width: calc(100vw / var(--scale));
+}
+
+@media (max-width: 768px) {
+  .scaling-provider {
+    --scale: 1 !important;
+  }
+}
