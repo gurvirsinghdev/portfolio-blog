@@ -216,6 +216,11 @@ pre code {
   max-width: calc(100vw / var(--scale));
 }
 
+.scaling-h-screen {
+  min-height: calc(100vh / var(--scale));
+  max-height: calc(100vh / var(--scale));
+}
+
 @media (max-width: 768px) {
   .scaling-provider {
     --scale: 1 !important;

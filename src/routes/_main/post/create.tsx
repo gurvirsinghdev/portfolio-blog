@@ -1,4 +1,3 @@
-import { authMiddleware } from '#/lib/middleware';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useEffect, useRef } from 'react';
 
@@ -6,9 +5,6 @@ import { HiArrowLongLeft } from 'react-icons/hi2';
 
 export const Route = createFileRoute('/_main/post/create')({
   component: RouteComponent,
-  server: {
-    middleware: [authMiddleware],
-  },
 });
 
 function RouteComponent() {
