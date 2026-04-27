@@ -8,104 +8,104 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
-import { Route as MainRouteRouteImport } from './routes/_main/route'
-import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
-import { Route as MainIndexRouteImport } from './routes/_main/index'
-import { Route as MainPostIdRouteImport } from './routes/_main/$postId'
-import { Route as MainAuthRouteRouteImport } from './routes/_main/auth/route'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as MainPostCreateRouteImport } from './routes/_main/post/create'
-import { Route as MainAuthRegisterRouteImport } from './routes/_main/auth/register'
-import { Route as MainAuthLoginRouteImport } from './routes/_main/auth/login'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as DashboardRouteRouteImport } from './routes/dashboard/route';
+import { Route as MainRouteRouteImport } from './routes/_main/route';
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index';
+import { Route as MainIndexRouteImport } from './routes/_main/index';
+import { Route as MainPostIdRouteImport } from './routes/_main/$postId';
+import { Route as MainAuthRouteRouteImport } from './routes/_main/auth/route';
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$';
+import { Route as MainPostCreateRouteImport } from './routes/_main/post/create';
+import { Route as MainAuthRegisterRouteImport } from './routes/_main/auth/register';
+import { Route as MainAuthLoginRouteImport } from './routes/_main/auth/login';
 
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MainRouteRoute = MainRouteRouteImport.update({
   id: '/_main',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
-} as any)
+} as any);
 const MainIndexRoute = MainIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => MainRouteRoute,
-} as any)
+} as any);
 const MainPostIdRoute = MainPostIdRouteImport.update({
   id: '/$postId',
   path: '/$postId',
   getParentRoute: () => MainRouteRoute,
-} as any)
+} as any);
 const MainAuthRouteRoute = MainAuthRouteRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => MainRouteRoute,
-} as any)
+} as any);
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MainPostCreateRoute = MainPostCreateRouteImport.update({
   id: '/post/create',
   path: '/post/create',
   getParentRoute: () => MainRouteRoute,
-} as any)
+} as any);
 const MainAuthRegisterRoute = MainAuthRegisterRouteImport.update({
   id: '/register',
   path: '/register',
   getParentRoute: () => MainAuthRouteRoute,
-} as any)
+} as any);
 const MainAuthLoginRoute = MainAuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => MainAuthRouteRoute,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof MainIndexRoute
-  '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/auth': typeof MainAuthRouteRouteWithChildren
-  '/$postId': typeof MainPostIdRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/auth/login': typeof MainAuthLoginRoute
-  '/auth/register': typeof MainAuthRegisterRoute
-  '/post/create': typeof MainPostCreateRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/': typeof MainIndexRoute;
+  '/dashboard': typeof DashboardRouteRouteWithChildren;
+  '/auth': typeof MainAuthRouteRouteWithChildren;
+  '/$postId': typeof MainPostIdRoute;
+  '/dashboard/': typeof DashboardIndexRoute;
+  '/auth/login': typeof MainAuthLoginRoute;
+  '/auth/register': typeof MainAuthRegisterRoute;
+  '/post/create': typeof MainPostCreateRoute;
+  '/api/auth/$': typeof ApiAuthSplatRoute;
 }
 export interface FileRoutesByTo {
-  '/auth': typeof MainAuthRouteRouteWithChildren
-  '/$postId': typeof MainPostIdRoute
-  '/': typeof MainIndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/auth/login': typeof MainAuthLoginRoute
-  '/auth/register': typeof MainAuthRegisterRoute
-  '/post/create': typeof MainPostCreateRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/auth': typeof MainAuthRouteRouteWithChildren;
+  '/$postId': typeof MainPostIdRoute;
+  '/': typeof MainIndexRoute;
+  '/dashboard': typeof DashboardIndexRoute;
+  '/auth/login': typeof MainAuthLoginRoute;
+  '/auth/register': typeof MainAuthRegisterRoute;
+  '/post/create': typeof MainPostCreateRoute;
+  '/api/auth/$': typeof ApiAuthSplatRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_main': typeof MainRouteRouteWithChildren
-  '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/_main/auth': typeof MainAuthRouteRouteWithChildren
-  '/_main/$postId': typeof MainPostIdRoute
-  '/_main/': typeof MainIndexRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/_main/auth/login': typeof MainAuthLoginRoute
-  '/_main/auth/register': typeof MainAuthRegisterRoute
-  '/_main/post/create': typeof MainPostCreateRoute
-  '/api/auth/$': typeof ApiAuthSplatRoute
+  __root__: typeof rootRouteImport;
+  '/_main': typeof MainRouteRouteWithChildren;
+  '/dashboard': typeof DashboardRouteRouteWithChildren;
+  '/_main/auth': typeof MainAuthRouteRouteWithChildren;
+  '/_main/$postId': typeof MainPostIdRoute;
+  '/_main/': typeof MainIndexRoute;
+  '/dashboard/': typeof DashboardIndexRoute;
+  '/_main/auth/login': typeof MainAuthLoginRoute;
+  '/_main/auth/register': typeof MainAuthRegisterRoute;
+  '/_main/post/create': typeof MainPostCreateRoute;
+  '/api/auth/$': typeof ApiAuthSplatRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/dashboard'
@@ -115,8 +115,8 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/post/create'
-    | '/api/auth/$'
-  fileRoutesByTo: FileRoutesByTo
+    | '/api/auth/$';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/auth'
     | '/$postId'
@@ -125,7 +125,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/post/create'
-    | '/api/auth/$'
+    | '/api/auth/$';
   id:
     | '__root__'
     | '/_main'
@@ -137,109 +137,109 @@ export interface FileRouteTypes {
     | '/_main/auth/login'
     | '/_main/auth/register'
     | '/_main/post/create'
-    | '/api/auth/$'
-  fileRoutesById: FileRoutesById
+    | '/api/auth/$';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  MainRouteRoute: typeof MainRouteRouteWithChildren
-  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  MainRouteRoute: typeof MainRouteRouteWithChildren;
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren;
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/dashboard';
+      path: '/dashboard';
+      fullPath: '/dashboard';
+      preLoaderRoute: typeof DashboardRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_main': {
-      id: '/_main'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof MainRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/_main';
+      path: '';
+      fullPath: '/';
+      preLoaderRoute: typeof MainRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/dashboard/': {
-      id: '/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
+      id: '/dashboard/';
+      path: '/';
+      fullPath: '/dashboard/';
+      preLoaderRoute: typeof DashboardIndexRouteImport;
+      parentRoute: typeof DashboardRouteRoute;
+    };
     '/_main/': {
-      id: '/_main/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof MainIndexRouteImport
-      parentRoute: typeof MainRouteRoute
-    }
+      id: '/_main/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof MainIndexRouteImport;
+      parentRoute: typeof MainRouteRoute;
+    };
     '/_main/$postId': {
-      id: '/_main/$postId'
-      path: '/$postId'
-      fullPath: '/$postId'
-      preLoaderRoute: typeof MainPostIdRouteImport
-      parentRoute: typeof MainRouteRoute
-    }
+      id: '/_main/$postId';
+      path: '/$postId';
+      fullPath: '/$postId';
+      preLoaderRoute: typeof MainPostIdRouteImport;
+      parentRoute: typeof MainRouteRoute;
+    };
     '/_main/auth': {
-      id: '/_main/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof MainAuthRouteRouteImport
-      parentRoute: typeof MainRouteRoute
-    }
+      id: '/_main/auth';
+      path: '/auth';
+      fullPath: '/auth';
+      preLoaderRoute: typeof MainAuthRouteRouteImport;
+      parentRoute: typeof MainRouteRoute;
+    };
     '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/api/auth/$';
+      path: '/api/auth/$';
+      fullPath: '/api/auth/$';
+      preLoaderRoute: typeof ApiAuthSplatRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_main/post/create': {
-      id: '/_main/post/create'
-      path: '/post/create'
-      fullPath: '/post/create'
-      preLoaderRoute: typeof MainPostCreateRouteImport
-      parentRoute: typeof MainRouteRoute
-    }
+      id: '/_main/post/create';
+      path: '/post/create';
+      fullPath: '/post/create';
+      preLoaderRoute: typeof MainPostCreateRouteImport;
+      parentRoute: typeof MainRouteRoute;
+    };
     '/_main/auth/register': {
-      id: '/_main/auth/register'
-      path: '/register'
-      fullPath: '/auth/register'
-      preLoaderRoute: typeof MainAuthRegisterRouteImport
-      parentRoute: typeof MainAuthRouteRoute
-    }
+      id: '/_main/auth/register';
+      path: '/register';
+      fullPath: '/auth/register';
+      preLoaderRoute: typeof MainAuthRegisterRouteImport;
+      parentRoute: typeof MainAuthRouteRoute;
+    };
     '/_main/auth/login': {
-      id: '/_main/auth/login'
-      path: '/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof MainAuthLoginRouteImport
-      parentRoute: typeof MainAuthRouteRoute
-    }
+      id: '/_main/auth/login';
+      path: '/login';
+      fullPath: '/auth/login';
+      preLoaderRoute: typeof MainAuthLoginRouteImport;
+      parentRoute: typeof MainAuthRouteRoute;
+    };
   }
 }
 
 interface MainAuthRouteRouteChildren {
-  MainAuthLoginRoute: typeof MainAuthLoginRoute
-  MainAuthRegisterRoute: typeof MainAuthRegisterRoute
+  MainAuthLoginRoute: typeof MainAuthLoginRoute;
+  MainAuthRegisterRoute: typeof MainAuthRegisterRoute;
 }
 
 const MainAuthRouteRouteChildren: MainAuthRouteRouteChildren = {
   MainAuthLoginRoute: MainAuthLoginRoute,
   MainAuthRegisterRoute: MainAuthRegisterRoute,
-}
+};
 
 const MainAuthRouteRouteWithChildren = MainAuthRouteRoute._addFileChildren(
   MainAuthRouteRouteChildren,
-)
+);
 
 interface MainRouteRouteChildren {
-  MainAuthRouteRoute: typeof MainAuthRouteRouteWithChildren
-  MainPostIdRoute: typeof MainPostIdRoute
-  MainIndexRoute: typeof MainIndexRoute
-  MainPostCreateRoute: typeof MainPostCreateRoute
+  MainAuthRouteRoute: typeof MainAuthRouteRouteWithChildren;
+  MainPostIdRoute: typeof MainPostIdRoute;
+  MainIndexRoute: typeof MainIndexRoute;
+  MainPostCreateRoute: typeof MainPostCreateRoute;
 }
 
 const MainRouteRouteChildren: MainRouteRouteChildren = {
@@ -247,38 +247,38 @@ const MainRouteRouteChildren: MainRouteRouteChildren = {
   MainPostIdRoute: MainPostIdRoute,
   MainIndexRoute: MainIndexRoute,
   MainPostCreateRoute: MainPostCreateRoute,
-}
+};
 
 const MainRouteRouteWithChildren = MainRouteRoute._addFileChildren(
   MainRouteRouteChildren,
-)
+);
 
 interface DashboardRouteRouteChildren {
-  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute;
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardIndexRoute: DashboardIndexRoute,
-}
+};
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
   DashboardRouteRouteChildren,
-)
+);
 
 const rootRouteChildren: RootRouteChildren = {
   MainRouteRoute: MainRouteRouteWithChildren,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { getRouter } from './router.tsx';
+import type { createStart } from '@tanstack/react-start';
 declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }
