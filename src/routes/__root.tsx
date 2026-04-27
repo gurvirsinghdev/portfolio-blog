@@ -1,16 +1,11 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router';
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-import { TanStackDevtools } from '@tanstack/react-devtools';
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { TanStackDevtools } from '@tanstack/react-devtools'
 
-import appCss from '../styles.css?url';
+import appCss from '../styles.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
-    scripts: [
-      {
-        src: '/scaling.js',
-      },
-    ],
     meta: [
       { charSet: 'utf-8' },
       {
@@ -27,7 +22,7 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
-});
+})
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
@@ -36,7 +31,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="dark">
-        {children}
+        <div
+          style={{
+            scale: 14 / 10,
+            transformOrigin: 'top left',
+            maxWidth: `calc(100vw*${10 / 14})`,
+            minHeight: `calc(100vh*${10 / 14})`,
+          }}
+        >
+          {children}
+        </div>
         <TanStackDevtools
           config={{
             position: 'bottom-right',
@@ -51,5 +55,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  );
+  )
 }

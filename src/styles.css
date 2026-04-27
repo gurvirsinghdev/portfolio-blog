@@ -163,7 +163,6 @@ html,
 body,
 #app {
   min-height: 100%;
-  max-width: calc(100vw) !important;
   width: 100%;
 }
 
