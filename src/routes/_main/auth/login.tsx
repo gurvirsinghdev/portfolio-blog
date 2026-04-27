@@ -1,28 +1,42 @@
-import { authClient } from '#/lib/auth-client'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import type { ChangeEvent } from 'react'
-import { z } from 'zod/mini'
+import { authClient } from '#/lib/auth-client';
+import { createFileRoute, Link } from '@tanstack/react-router';
+import type { ChangeEvent } from 'react';
+import { z } from 'zod/mini';
 
 export const Route = createFileRoute('/_main/auth/login')({
   component: RouteComponent,
-})
+});
 
 const formSchema = z.object({
   email: z.email(),
   password: z.string(),
-})
+});
 
 function RouteComponent() {
   const formHandler = function (e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const data = formSchema.parse(Object.fromEntries(formData.entries()))
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = formSchema.parse(Object.fromEntries(formData.entries()));
 
-    authClient.signIn.email({
-      email: data.email,
-      password: data.password,
-    })
-  }
+    authClient.signIn.email(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          e.target.reset();
+          alert('Login successful!');
+        },
+        onError: (error) => {
+          console.error(error);
+          alert(
+            'Unable to login. Please check your credentials and try again.',
+          );
+        },
+      },
+    );
+  };
 
   return (
     <div className="my-8 grid w-full grid-cols-1 grid-rows-1 border-2 lg:grid-cols-2">
@@ -72,5 +86,5 @@ function RouteComponent() {
         src="https://picsum.photos/1000/500"
       />
     </div>
-  )
+  );
 }
