@@ -1,3 +1,4 @@
+import StackView from '#/lib/components/StackView';
 import { getPostById } from '#/lib/server-functions';
 import { getPostCoverImageLink } from '#/lib/utils';
 import { createFileRoute, notFound } from '@tanstack/react-router';
@@ -14,21 +15,23 @@ function RouteComponent() {
   }
 
   return (
-    <div className="prose prose-invert max-w-none pt-8">
-      <h1 className="capitalize">{post.title}</h1>
+    <StackView>
+      <div className="prose prose-invert max-w-none pt-8">
+        <h1 className="capitalize">{post.title}</h1>
 
-      <img
-        src={getPostCoverImageLink(post.id)}
-        alt="Blog post cover"
-        className="aspect-16/5.5 w-full rounded-lg object-cover object-bottom"
-      />
+        <img
+          src={getPostCoverImageLink(post.id)}
+          alt="Blog post cover"
+          className="aspect-16/5.5 w-full rounded-lg object-cover object-bottom"
+        />
 
-      {post.description
-        .split('\n')
-        .filter((p) => p)
-        .map((p) => (
-          <p>{p.trim()}</p>
-        ))}
-    </div>
+        {post.description
+          .split('\n')
+          .filter((p) => p)
+          .map((p) => (
+            <p>{p.trim()}</p>
+          ))}
+      </div>
+    </StackView>
   );
 }

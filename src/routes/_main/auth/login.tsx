@@ -1,7 +1,6 @@
 import { authClient } from '#/lib/auth-client';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import type { ChangeEvent } from 'react';
-import { HiArrowLongLeft } from 'react-icons/hi2';
 import { z } from 'zod/mini';
 
 export const Route = createFileRoute('/_main/auth/login')({

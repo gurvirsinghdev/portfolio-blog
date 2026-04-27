@@ -1,5 +1,5 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
-import { HiArrowLongLeft } from 'react-icons/hi2';
+import StackView from '#/lib/components/StackView';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_main/auth')({
   component: RouteComponent,
@@ -7,17 +7,8 @@ export const Route = createFileRoute('/_main/auth')({
 
 function RouteComponent() {
   return (
-    <div className="grid w-full place-items-center">
-      <div className="w-full">
-        <Link
-          className="text-muted-foreground hover:text-foreground flex w-max items-center justify-start gap-1 underline"
-          to={'/'}
-        >
-          <HiArrowLongLeft className="size-5" />
-          <span>Home</span>
-        </Link>
-      </div>
+    <StackView>
       <Outlet />
-    </div>
+    </StackView>
   );
 }
